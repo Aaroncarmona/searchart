@@ -1,0 +1,56 @@
+<div class="container col-lg-12">
+	
+<form action="" method="POST" role="form">
+	<legend>Nueva Pintura</legend>
+
+	
+	<div class="form-group">
+		<label for="sala" class="control-label">Sala:</label>
+		<div>
+			<select name="sala" id="sala" class="form-control">
+				<option value="">-- Select One --</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="tex" class="control-label">Tipo de Exhibicion:</label>
+		<div>
+			<select name="tex" id="tex" class="form-control">
+				<option value="">-- Select One --</option>
+			</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="inputNom" class="control-label">Nombre:</label>
+		<div>
+			<input type="text" name="nom" id="nom" class="form-control" required="required" title="Ingresa un nombre" placeholder="Ingresa el nombre del autor">
+		</div>
+	</div>
+
+	<div class="input-group">
+		<label for="des" class="control-label">Descripcion:</label>
+		<div>
+			<textarea name="des" id="des" class="form-control" rows="5" required="required" title="Ingresa informacion del la exhibicion" placeholder="Escribe una descripcion de la exhibiicon"></textarea>	
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fi" class="control-label">Fecha de inicio:</label>
+		<div>
+			<input type="date" name="fi" id="fi" class="form-control" required="required" title="Ingresa la fecha de inicio" placeholder="Fecha de inicio">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fn" class="control-label">Fecha de fin:</label>
+		<div>
+			<input type="date" name="fn" id="fn" class="form-control" required="required" title="Ingresa la fecha de fin" placeholder="Fecha de fin">
+		</div>
+	</div>
+	<button type="submit" class="btn btn-success">Registrar pintura</button>
+	<button type="submit" class="btn btn-info">Limpiar registro</button>
+	<button type="submit" class="btn btn-danger">Cancelar</button>
+</form>
+</div>

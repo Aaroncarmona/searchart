@@ -1,0 +1,40 @@
+<div class="container col-xs-12">	
+
+<form action="" method="POST" role="form">
+	<legend>Nuevo Cliente</legend>
+	
+	<div class="input-group">
+		<span class="input-group-addon">Nombre</span>
+		<input type="text" class="form-control" id="nom" placeholder="Nombre" required="required" title="Ingrese el nombre del autor">
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon">Apodo</span>
+		<input type="text" name="apodo" id="apodo" class="form-control"  required="required"  title="Ingrese algun Apodo/Pseudonimo" placeholder="Apodo">
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon">Apellido Paterno</span>
+		<input type="text" name="appat" id="appat" class="form-control"  required="required"  title="Ingrese el Apellido Paterno del autor" placeholder="Apellido Paterno">
+	</div>
+
+	<div class="input-group">
+		<span class="input-group-addon">Apellido Materno</span>
+		<input type="text" name="apmat" id="apmat" class="form-control"  required="required"  title="Ingrese el Apellido Materno" placeholder="Apellido Materno">
+	</div>
+                                                                                                                                                                                       
+	<div class="input-group">
+		<span class="input-group-addon">Foto</span>
+		<input type="file" name="foto" id="foto" class="form-control"  required="required"  title="Selecciona una foto"/>
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon">Descripcion</span>
+		<textarea name="des" id="des" class="form-control" rows="5" required="required" title="Ingresa informacion del autor" placeholder="Escribe una breve introduccion al autor"></textarea>	
+	</div>
+
+<br>
+	<button type="submit" class="btn btn-primary">Agregar autor</button>
+	
+</form>
+
+</div>
