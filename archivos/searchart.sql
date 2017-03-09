@@ -2,22 +2,22 @@ drop database searchart;
 create database searchart;
 use searchart
 
-create table lvlUser(
-  lvl_ID int(11) unsigned not null COMMENT 'Identificador',
-  lvl_NIV int(1) not null COMMENT 'Nivel del usuario',
-  lvl_NOM varchar(30) not null COMMENT 'Nombre del nivel de usuario',
-  primary key(lvl_ID)
+create table TipoUsuario(
+  tu_ID int(11) unsigned not null AUTO_INCREMET COMMENT 'Identificador del Tipo del Usuario',
+  tu_NIV int(1) not null COMMENT 'Nivel del usuario',
+  tu_NOM varchar(30) not null COMMENT 'Nombre del nivel de usuario',
+  primary key(tu_ID)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COMMENT='Nivel que que tienen los usuarios';
 
-create table user(
-  us_ID int(11) unsigned not null COMMENT 'Identificador',
-  lvl_ID int(11) unsigned not null COMMENT 'Identificador de lvluser',
+create table Usuario(
+  us_ID int(11) unsigned not null AUTO_INCREMENT COMMENT 'Identificador del Usuario',
+  tu_ID int(11) unsigned not null COMMENT 'Identificador del Tipo de Usuario',
   us_NOM varchar(30) not null COMMENT 'Nombre del usuario',
   us_APP varchar(32) not null COMMENT 'Apellidos del usuario',
   us_USERNAME char(32) not null COMMENT 'Nombre del usuario',
   us_PASSWORD char(32) not null COMMENT 'Contraseña del usuario',
   primary key(us_ID),
-  foreign key(lvl_ID) references lvlUser(lvl_ID)
+  foreign key(tu_ID) references TipoUsuario(tu_ID)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COMMENT='TABLA DE USUARIOS';
 
 CREATE TABLE delegacion (
@@ -29,12 +29,12 @@ CREATE TABLE delegacion (
 
 
 
-/*create table status(
+create table status(
   st_ID int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Llave primaria del status',
   st_NOM varchar(20) NOT NULL COMMENT 'Nombre del status',
   primary key(st_ID)
 )ENGINE=MYISAM DEFAULT CHARSET=utf8 COMMENT='Esta tabla representa el status que se le dara a los museos';
-*/
+
 
 
 CREATE TABLE museo (
@@ -51,7 +51,6 @@ CREATE TABLE museo (
   mus_HORI time NOT NULL COMMENT 'Es la hora con la que abren regularmente',
   mus_HORF time NOT NULL COMMENT 'Hora en la que finalizan regularmente',
   mus_COS decimal(5,2) NOT NULL COMMENT 'Costo por entrar al museo',
-  mus_ST int(1) not null comment 'Estado del museo',
   primary key(mus_ID),
   foreign key (del_ID) references delegacion(del_ID),
   foreign key (st_ID) references status(st_ID),
@@ -71,10 +70,12 @@ CREATE TABLE piso (
 create table sala (
   sal_ID INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la sala',
   pis_ID INT(11) UNSIGNED NOT NULL COMMENT 'Identificador del piso del museo',
+  st_ID int(11) UNSIGNED NOT NULL COMMENT 'Llave foranea del status',
   sal_NOM varchar(30) not null COMMENT 'Nombre de la sala',
   sal_FOTO varchar(30) not null COMMENT 'Foto de la sala',
   sal_ST int(1) not null comment 'Estado de la sala',
   primary key(sal_ID),
+  foreign key (st_ID) references status(st_ID),
   foreign key (pis_ID) references piso(pis_ID)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8 COMMENT='Se registran las salas que tienen los pisos';
 
@@ -158,7 +159,7 @@ END$$
 DELIMITER;
 
 DROP TRIGGER delegacion_eliminar;
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER delegacion_eliminar
   BEFORE DELETE ON delegacion
   FOR EACH ROW
@@ -168,7 +169,8 @@ BEGIN
   bit_TABLA = 'delegacion',
   bit_TRAN = CONCAT( 'TIPO DE EVENTO > DELETE\n IDENTIFICADOR ' , OLD.del_ID , '\nNombre ' , OLD.del_NOM ),
   bit_FECHA = CURRENT_TIMESTAMP();
-END$$
+END
+//
 DELIMITER;
 
 DROP TRIGGER delegacion_actualizar;
@@ -182,7 +184,8 @@ BEGIN
   bit_TABLA = 'delegacion',
   bit_TRAN = CONCAT( 'TIPO DE EVENTO > UPDATE\n\nANTES\nIDENTIFICADOR ' , OLD.del_ID , '\nNombre ' , OLD.del_NOM , '\n\nDespues\n' , 'IDENTIFICADOR ' , OLD.del_ID , '\nNombre ' , OLD.del_NOM),
   bit_FECHA = CURRENT_TIMESTAMP();
-END$$
+END
+$$
 DELIMITER;
 /*fin de trigger delegacion*/
 
@@ -254,9 +257,29 @@ pintura
 */
 
 /*INICIO PROCEDIMIENTOS ALMACENADOS*/
+
+/*INICIO USUARIO*/
+/*
+  0 SYSTEMA
+  1 ADMINISTRADOR
+  2 EMPLEADO
+  3 NO REGISTRADO
+  4 CONTRASEÑA INCORRECTA
+*/
+DROP PROCEDURE login;
+DELIMITER $$
+CREATE PROCEDURE login( OUT TIPO INT(1) , IN USERNAME CHAR(32) , IN PASSWORD char(32) )
+  BEGIN
+    select tu_ID INTO TIPO from usuario where us_USERNAME like MD5(USERNAME) AND us_PASSWORD LIKE MD5(PASSWORD);
+    return TIPO;
+  END
+$$
+DELIMITER;
+/*FIN USUARIO*/
+
   /*INICIO AUTORES*/
 DELIMITER $$
-CREATE PROCEDURE getAllAutores()
+CREATE PROCEDURE getAllAutor()
   BEGIN
     SELECT * FROM autor;
   END $$
@@ -268,6 +291,14 @@ CREATE PROCEDURE getByIdAutor( IN ID INT(11) )
     SELECT * FROM autor WHERE au_ID = ID ;
   END $$
 DELIMITER;
+
+DELIMITER $$
+CREATE PROCEDURE countAutor()
+  BEGIN 
+    SELECT COUNT(*) FROM autor;
+  END $$
+DELIMITER;
+
 
 DROP PROCEDURE insertAutor;
 DELIMITER $$
@@ -281,4 +312,97 @@ DELIMITER;
 
 call insertAutor(@ID,'1','1','1','1','1','1');
   /*FIN AUTORES*/
+
+
+/*INICIO BITACORA*/
+DELIMITER $$
+CREATE PROCEDURE getAllBitacora()
+  BEGIN
+    SELECT * from bitacora order by bit_FECHA desc;
+  END $$
+DELIMITER;
+/*FIN BITACORA*/
+
+/*INICIO TEXHIBICION*/
+DELIMITER $$
+CREATE PROCEDURE getAllTexhibicion()
+  BEGIN
+    SELECT * FROM texhibicion;
+  END $$
+DELIMITER;
+/*FIN TEXHIBICION*/
+
+/*INICIO LVLUSER*/
+DELIMITER $$
+CREATE PROCEDURE getAllLvlUser()
+  BEGIN
+    SELECT * FROM lvlUser;
+  END $$
+DELIMITER;
+
+DELIMITER $$
+CREATE PROCEDURE getByIdLvlUser( ID INT(11) )
+  BEGIN
+    SELECT * FROM lvlUser WHERE lvl_ID = ID;
+  END $$
+DELIMITER; 
+/*FIN LVLUSER*/
+
+
+
+ /*INICIO MUSEO*/
+DELIMITER $$
+CREATE PROCEDURE getAllMuseo()
+  BEGIN
+    SELECT * from museo order by mus_NOM desc;
+  END $$
+DELIMITER;
+
+DELIMITER $$
+CREATE PROCEDURE getByIdMuseo(IN ID INT(11))
+  BEGIN
+    SELECT * from museo where mus_ID = ID;
+  END $$
+DELIMITER;
+
+DELIMITER $$
+CREATE PROCEDURE countMuseo()
+  BEGIN
+    SELECT count(*) from museo;
+  END $$
+DELIMITER;
+  /*FIN MUSEO*/
+
+
+
+
+
+ 
+  
+
+
+/*INICIO PISO*/
+DELIMITER $$
+CREATE PROCEDURE getAllPiso()
+  BEGIN
+    SELECT * FROM  piso;
+  END $$
+  DELIMITER;
+
+  CREATE PROCEDURE get
+/*FIN PISO*/
+
+/*INICIO SALA*/
+DELIMITER $$
+CREATE PROCEDURE getAllSala()
+  BEGIN
+    SELECT * FROM sala;
+  END $$
+DELIMITER;
+/*FIN SALA*/
+
+
+
+
+
 /*FIN PROCEDIMIENTOS ALMACENADOS*/
