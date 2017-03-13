@@ -4,7 +4,9 @@ ruta para saber donde estoy
 contenedores/dinamico/admin/adminInicio.php
 
 */
-	
+	session_start();
+	if( isset($_SESSION['usuario'] ) )
+	{
 	include('contenedores/estatico/admin/head.html');
 	include('contenedores/estatico/admin/nav.html');
 ?>
@@ -33,5 +35,15 @@ contenedores/dinamico/admin/adminInicio.php
        	</div> <!-- cierra row -->
    	</div><!--cierra container -->
 <?php 
-include('contenedores/estatico/admin/footer.html');
+	include('contenedores/estatico/admin/footer.html');
+	}
+	else
+	{
+		?>
+			<script>
+				alert("No se ha iniciado sesion");
+				location.href = "../vista/sesion.php";
+			</script>
+		<?php
+	}
 ?>

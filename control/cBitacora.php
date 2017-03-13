@@ -1,5 +1,4 @@
 <?php 
-
     include "../modelo/info/InfoBitacora.php";
     include "../modelo/conexiones/Conexion00.php";
 
@@ -8,5 +7,10 @@
 
     $datos = $bitacora->getAll();
 
-    include "contenedores/dinamico/admin/bitacora.php";
+    if(count($datos) == 0 ){
+    	include "contenedores/estatico/vacio.html";
+    }else{
+    	include "contenedores/dinamico/admin/bitacora.php";
+    	
+    }
 ?>
