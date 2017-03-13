@@ -9,22 +9,32 @@
     
     $nivel = $usuario->iniciarSesion($_REQUEST['usu'],$_REQUEST['pass']);
 
-    if ($nivel !== -1 ){
+    if ($nivel !== -1 )
+    {
 		session_start();
 		$_SESSION['usuario'] = $_REQUEST['usu'];
 		$_SESSION['tipo'] = $nivel;
 	    
-	    if($nivel == '0'){
+	    if($nivel == '0')
+	    {
 	    	echo "nivel systema";
-	    }else if($nivel == '1'){
+	    }
+	    else if($nivel == '1')
+	    {
 	    	header("Location: ../vista/adminInicio.php");
-	    }else if($nivel == '2'){
+	    }
+	    else if($nivel == '2')
+	    {
 	    	echo "nivel empleado";
-	    }else{
+	    }
+	    else
+	    {
 	    	echo "No existe ese tipo de usuario";
 	    }
-    }else{
-    	?>
+    }
+    else
+    {
+		?>
 	    	<script>
 	    		alert("Favor de revisar el usuario y/o contraseña");
 	    		location.href = "../vista/sesion.php";
