@@ -87,6 +87,10 @@ class Conexion00{
     public function desconectar(){
         $con->close();
     }
+
+    public function close(){
+        mysqli_close($this->con);
+    }
 }
 
 ?>
