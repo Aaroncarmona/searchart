@@ -1,3 +1,19 @@
+/*INICIO TIPO USUARIO*/
+insert into tipousuario(tu_NIV,tu_NOM) values
+	(0,"system"),
+	(1,"administrador"),
+	(2,"empleado");
+/*FIN TIPO USUARIO*/
+
+/*INICIO USUARIO*/
+
+INSERT INTO USUARIO(tu_ID,us_NOM,us_APP,us_USERNAME,us_PASSWORD) VALUES
+CALL insertUsuario(1,"aaron adrian","carmona espinosa",MD5("aaroncarmona"),MD5("carona11"));
+
+
+
+/*FIN USUARIO*/
+
 
 INSERT INTO autor(au_ID, au_NOM, au_APODO, au_APPAT, au_APMAT, au_FOTO, au_DES) 
 VALUES ('value1','value2','value3','value4','value5','value6','value7');
