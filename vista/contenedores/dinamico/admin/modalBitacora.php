@@ -10,7 +10,8 @@
         
         <strong>Usuario: </strong><?php echo $datos[$i]->getUsu();?><br>
         <strong>Tabla afectada: </strong><?php echo $datos[$i]->getTabla(); ?><br>
-        <strong>Transaccion realizada: </strong><h3><?php echo $datos[$i]->getTran(); ?></h3><br>
+        <strong>Transaccion: </strong><span class="text-primary"><?php echo $datos[$i]->getTran(); ?></span><br>
+        <strong>Descripción: </strong><h3><?php echo $datos[$i]->getDesc(); ?></h3><br>
         <strong>Fecha: </strong><?php echo $datos[$i]->getFecha(); ?>
 
       </div>

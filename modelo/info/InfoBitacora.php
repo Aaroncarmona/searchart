@@ -14,13 +14,15 @@ class InfoBitacora{
 		$obj = null;
 		$query = $this->con->query($stmt);
 		while ($dato = mysqli_fetch_array($query)) {
+
 			$obj[$i]= new Bitacora();
 			$obj[$i]->inicializar(
 				$dato[0],	
 				$dato[1],	
 				$dato[2],
 				$dato[3],
-				$dato[4]
+				$dato[4],
+				$dato[5]
 			);
 		$i++;
 		}

@@ -4,14 +4,40 @@ class Bitacora{
 	private $usu;
 	private $tabla;
 	private $tran;
+    private $desc;
 	private $fecha;
 
-	function inicializar($id, $usu, $tabla , $tran , $fecha) {
+	function inicializar($id, $usu, $tabla , $tran , $desc , $fecha) {
         $this->id = $id;
         $this->usu = $usu;
         $this->tabla = $tabla;
         $this->tran = $tran;
+        $this->desc = $desc;
         $this->fecha = $fecha;
+    }
+    
+    /**
+     * Gets the value of id.
+     *
+     * @return mixed
+     */
+    public function getDesc()
+    {
+        return $this->desc;
+    }
+
+    /**
+     * Sets the value of id.
+     *
+     * @param mixed $id the id
+     *
+     * @return self
+     */
+    private function setDesc($desc)
+    {
+        $this->desc = $desc;
+
+        return $this;
     }
 
     /**
