@@ -1,37 +1,35 @@
 <?php 
 class Museo{
-	private $id;
-	private $delId;
-	private $stId;
-	private $nom;
-	private $map;
-	private $foto;
-	private $tel;
-	private $cyn;
-	private $des;
-	private $cp;
-	private $hori;
-	private $horf;
-	private $cos;
+    private $id;   
+    private $delId;   
+    private $nom;  
+    private $map;  
+    private $foto; 
+    private $tel;  
+    private $cyn;  
+    private $des;  
+    private $cp;   
+    private $hori; 
+    private $horf; 
+    private $cos;  
+    private $st;	
 
-	function inicializar($id,$delId,$stId,$nom,$map,$foto,$tel,$cyn,$des,$cp,$hori,$horf,$cos) {
-		$this->id = $id;
-		$this->delId = $delId;
-		$this->stId = $stId;
-		$this->nom = $nom;
-		$this->map = $map;
-		$this->foto = $foto;
-		$this->tel = $tel;
-		$this->cyn = $cyn;
-		$this->des = $des;
-		$this->cp = $cp;
-		$this->hori = $hori;
-		$this->horf = $horf;
-		$this->cos = $cos;
+    public function inicializar($id,$delId,$nom,$map,$foto,$tel,$cyn,$des,$cp,$hori,$horf,$cos,$st){
+        $this->id=$id;
+        $this->delId=$delId;
+        $this->nom=$nom;
+        $this->map=$map;
+        $this->foto=$foto;
+        $this->tel=$tel;
+        $this->cyn=$cyn;
+        $this->des=$des;
+        $this->cp=$cp;
+        $this->hori=$hori;
+        $this->horf=$horf;
+        $this->cos=$cos;
+        $this->st=$st;
     }
-
-
-
+    
     /**
      * Gets the value of id.
      *
@@ -76,30 +74,6 @@ class Museo{
     private function setDelId($delId)
     {
         $this->delId = $delId;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of stId.
-     *
-     * @return mixed
-     */
-    public function getStId()
-    {
-        return $this->stId;
-    }
-
-    /**
-     * Sets the value of stId.
-     *
-     * @param mixed $stId the st id
-     *
-     * @return self
-     */
-    private function setStId($stId)
-    {
-        $this->stId = $stId;
 
         return $this;
     }
@@ -340,6 +314,30 @@ class Museo{
     private function setCos($cos)
     {
         $this->cos = $cos;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of st.
+     *
+     * @return mixed
+     */
+    public function getSt()
+    {
+        return $this->st;
+    }
+
+    /**
+     * Sets the value of st.
+     *
+     * @param mixed $st the st
+     *
+     * @return self
+     */
+    private function setSt($st)
+    {
+        $this->st = $st;
 
         return $this;
     }

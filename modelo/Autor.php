@@ -1,6 +1,5 @@
 <?php 
 class Autor{
-	
 	private $id;
 	private $nom;
 	private $apodo;
@@ -8,6 +7,17 @@ class Autor{
 	private $apmat;
 	private $foto;
 	private $des;
+
+    public function inicializar($id,$nom,$apodo,$appat,$apmat,$foto,$des)
+    {
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->apodo = $apodo;
+        $this->appat = $appat;
+        $this->apmat = $apmat;
+        $this->foto = $foto;
+        $this->des = $des;
+    }
 
     /**
      * Gets the value of id.

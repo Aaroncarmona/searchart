@@ -1,6 +1,6 @@
 <?php
 include '../modelo/Usuario.php';
-class InfoUsuario{
+class InfoUsuario extends Usuario{
 	private $con;
 
 	public function __construct(){
@@ -62,6 +62,73 @@ class InfoUsuario{
 			$numero = $dato[0];
 		}
 		return $numero;
+	}
+
+	public function insertar($us)
+	{
+		$this->con->close();
+		$this->con->conectar();
+		$stmt = "call usuario_insertar('".
+		$us."',".
+		$this->getTuId().",'".
+		$this->getNom()."','".
+		$this->getApp()."','".
+		$this->getUsername()."','".
+		$this->getPassword()."');";
+		
+		$query = $this->con->query($stmt);
+		if( $query )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function eliminar($us,$id)
+	{
+		$this->con->close();
+		$this->con->conectar();
+		$stmt = "call usuario_eliminar('".$us."',"
+		.$id.")";
+		$query = $this->con->query($stmt);
+		if( $query )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function actualizar($usu)
+	{
+		$this->con->close();
+		$this->con->conectar();
+
+		$stmt = "call usuario_actualizar('".
+			$usu."',".
+			$this->getId().",".
+			$this->getTuId().",'".
+			$this->getNom()."','".
+			$this->getApp()."','".
+			$this->getUsername()."','". 
+			$this->getPassword()."')";
+
+		$query = $this->con->query($stmt);
+		
+		if($query)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
 }

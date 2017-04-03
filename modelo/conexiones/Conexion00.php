@@ -8,10 +8,10 @@ class Conexion00{
     private $con;
     
     public function __construct(){
-        $this->host = "127.0.0.1";
-        $this->user = "root";
+        $this->host = "localhost";
+        $this->user = "id1222746_root";
         $this->pass = "carmona11";
-        $this->bd = "searchart";
+        $this->bd = "id1222746_searchart";
         $this->port = "3306";
         $this->conectar();
     }

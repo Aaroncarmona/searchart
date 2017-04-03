@@ -8,7 +8,7 @@ class Usuario{
 	private $password;
 
 
-	function inicializar($id,$tuId,$nom,$app,$username,$password) {
+	public function inicializar($id,$tuId,$nom,$app,$username,$password) {
 		$this->id = $id;
 		$this->tuId = $tuId;
 		$this->nom = $nom;

@@ -11,6 +11,5 @@
     	include "contenedores/estatico/vacio.html";
     }else{
     	include "contenedores/dinamico/admin/bitacora.php";
-    	
     }
 ?>

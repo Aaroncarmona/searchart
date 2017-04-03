@@ -6,12 +6,12 @@
 	<h3>Bitacora</h3>
 	<hr>
 	<div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span><strong>Informacion:</strong> Se muestra toda la actividad de las transacciones realizadas por los empleados.</div>
-<div class="table-responsive">
   
-	<div class="form-group">
+  <div class="form-group">
     <input type="text" class="search form-control" placeholder="Ingresa cualquier palabra">
   </div>
   <span class="counter"></span>
+<div class="table-responsive">
     <table class="table table-bordered table-hover results ">
       <thead>
         <tr>
@@ -33,7 +33,7 @@
       {
       ?>
         <tr>
-          <th scope="row"> <?php echo $datos[$i]->getId(); ?> </td>
+          <th scope="row"> <?php echo $datos[$i]->getId(); ?> </th>
           <td> <?php echo $datos[$i]->getUsu(); ?>   </td>
           <td> <?php echo $datos[$i]->getTabla(); ?> </td>
           <td> <?php echo $datos[$i]->getTran()  ?>  </td>
@@ -43,11 +43,18 @@
           </td>
         </tr>
       <?php
-        include("contenedores/dinamico/admin/modalBitacora.php");
         $i++;
       }
   ?>
       </tbody>
     </table>
+    <?php 
+      $i=0;
+      while($i!==$tam)
+      {
+        include("contenedores/dinamico/admin/modalBitacora.php");
+        $i++;
+      }
+     ?>
   </div>
 </div>

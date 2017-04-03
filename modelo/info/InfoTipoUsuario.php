@@ -1,6 +1,6 @@
 <?php
 include '../modelo/TipoUsuario.php';
-class InfoTipoUsuario{
+class InfoTipoUsuario {
 	private $con;
 
 	public function __construct(){
@@ -9,6 +9,8 @@ class InfoTipoUsuario{
 	}
 
 	public function getAll(){
+		$this->con->close();
+		$this->con->conectar();
 		$i = 0;
 		$stmt = "call getAllTipoUsuario();";
 		$obj = null;
@@ -26,6 +28,8 @@ class InfoTipoUsuario{
 	}
 
 	public function getById($id){
+		$this->con->close();
+		$this->con->conectar();
 		$stmt = "call getByIdTipoUsuario(".$id.");";
 		$obj = null;
 		$query = $this->con->query($stmt);

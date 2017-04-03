@@ -5,7 +5,7 @@ contenedores/dinamico/admin/adminInicio.php
 
 */
 	session_start();
-	if( isset($_SESSION['usuario'] ) )
+	if( isset($_SESSION['id'] ) )
 	{
 	include('contenedores/estatico/admin/head.html');
 	include('contenedores/estatico/admin/nav.html');
@@ -20,13 +20,30 @@ contenedores/dinamico/admin/adminInicio.php
 							{
 								include('../control/cBitacora.php');
 							}
+							else if($_REQUEST['page'] == "usuario")
+							{
+								include('../control/cUsuario.php');
+							}
+							else if($_REQUEST['page'] == "autor")
+							{
+								include('../control/cAutor.php');
+							}
 							else if($_REQUEST['page'] == "museo")
 							{
-								if ($_REQUEST['page'] == "museo" && $_REQUEST['accion'] == "mostrar")
-								{
-									include('../control/cMuseo.php');
-								}
+								include('../control/cMuseo.php');
 							}
+							else if($_REQUEST['page'] == "piso")
+							{
+								include('../control/cPiso.php');
+							}
+							else if($_REQUEST['page'] == "sala")
+							{
+								include('../control/cSala.php');
+							}
+						}
+						else
+						{
+							include('contenedores/dinamico/admin/bienvenida.php');
 						}
 				 	?>
 				</div>
